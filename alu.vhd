@@ -313,31 +313,31 @@ begin
     begin
 
         -- 0001
-        if shift_by = "0001" then -- shift_by by 2^0=1
+        if shift_by(0) = "1" then -- shift_by by 2^0=1
             shift_result_1 := (register_in((15-1) downto 0) & "0");
         else
             shift_result_1 := register_in; -- carry
         end if;
 
         -- 0010
-        if shift_by = "0010" then -- shift_by by 2^1 = 2
+        if shift_by(1) = "1" then -- shift_by by 2^1 = 2
             shift_result_2 := (shift_result_1((15-2) downto 0) & "00");
         else
             shift_result_2 := shift_result_1; -- carry
         end if;
         
         -- 0100
-        if shift_by = "0100" then -- shift_by by 2^2 = 4
+        if shift_by(2) = "1" then then -- shift_by by 2^2 = 4
             shift_result_3 := (shift_result_2((15-4) downto 0) & "0000");
         else
             shift_result_3 := shift_result_2; -- carry
         end if;
         
         -- 1000
-        if shift_by = "1000" then -- shift_by by 2^3 = 8
+        if shift_by(3) = "1" then then -- shift_by by 2^3 = 8
             shift_result_4 := (shift_result_3((15-8) downto 0) & "00000000");
         else
-            shift_result_4 := shift_result_3;
+            shift_result_4 := shift_result_3; -- carry
         end if;
             
         register_out <= shift_result_4; -- update
@@ -368,25 +368,25 @@ begin
 
         -- smsame style as shift_by left but other way around
             
-        if shift_by = "0001" then
+        if shift_by(0) = "1" then
             shift_result_1 := ("0" & register_in(15 downto 1));
         else
             shift_result_1 := register_in;
         end if;
 
-        if shift_by = "0010" then
+        if shift_by(1) = "1" then
             shift_result_2 := ("00" & shift_result_1(15 downto 2));
         else
             shift_result_2 := shift_result_1;
         end if;
         
-        if shift_by = "0100" then
+        if shift_by(2) = "1" then
             shift_result_3 := ("0000" & shift_result_2(15 downto 4));
         else
             shift_result_3 := shift_result_2;
         end if;
         
-        if shift_by = "1000" then
+        if shift_by(3) = "1" then
             shift_result_4 := ("00000000" & shift_result_3(15 downto 8));
         else
             shift_result_4 := shift_result_3;
