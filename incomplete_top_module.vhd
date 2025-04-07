@@ -316,14 +316,14 @@ begin
             doutb => doutb,
             addra => addra,
             addrb => addrb,
-            clka => clka,
+            clka => clk, -- normal clock
             clkb => clkb,
             dina => dina,
             ena => ena,
             enb => enb,
             regcea => regcea,
             regceb => regceb,
-            rsta => rsta,
+            rsta => rst, -- normal reset
             rstb => rstb,
             wea => wea);
 
@@ -331,9 +331,9 @@ begin
         port map(
             douta => douta,
             doutb => doutb,
-            clka => clka,
+            clka => clk, -- normal clock
             ena => ena,
-            rsta => rsta,
+            rsta => rst, -- normla reset
             sleep => sleep);
         
         
